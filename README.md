@@ -27,3 +27,4 @@ To host this app yourself you will need:
 * Isaac Friedman
 
 ## Acknowledgments
+* Based on a project from <https://codecademy.com>
