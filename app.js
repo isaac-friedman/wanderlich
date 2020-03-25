@@ -91,6 +91,7 @@ const run = () => {
     $venueDivs.forEach(venue => venue.empty());
     $weatherDiv.empty();
     $destination.empty();
+    $container.css('visibility', 'visible');
     getVenues().then(venues => renderVenues(venues));
     getWeather().then(weather => renderWeather(weather));
     return false;
