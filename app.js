@@ -19,6 +19,15 @@ const createVenueHTML = (name, location, icon) => {
   <p>${location.country}</p>`;
 }
 
+const createWeatherHTML = (currentDay) => {
+  console.log(currentDay)
+  return `<h2>${weekDays[(new Date()).getDay()]}</h2>
+		<h2>Temperature: ${kelvinToFahrenheit(currentDay.main.temp)}&deg;F</h2>
+		<h2>Condition: ${currentDay.weather[0].description}</h2>
+  	<img src="https://openweathermap.org/img/wn/${currentDay.weather[0].icon}@2x.png">`;
+}
+const kelvinToFahrenheit = k => ((k - 273.15) * 9 / 5 + 32).toFixed(0);
+
 //For fetching from APIs
 const getVenues = async () => {
     const city = $input.val();
@@ -66,12 +75,21 @@ const renderVenues = (toRender) => {
     $venue.append(venueContent);
     });
     $destination.append(`<h2>${toRender[0].location.city}</h2>`);
-    }
+}
+
+const renderWeather = (toRender) => {
+    console.log("Rendering Weather");
+    console.log(toRender);
+    let weatherContent = createWeatherHTML(toRender);
+    $weatherDiv.append(weatherContent);
+}
+
+
 
 //MAIN
 const run = () => {
   getVenues().then(venues => renderVenues(venues));
-  getWeather();
+  getWeather().then(weather => renderWeather(weather));
   return false;
 }
 
