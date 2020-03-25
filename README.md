@@ -14,14 +14,19 @@ To host this app yourself you will need:
 1. Clone this repository.
 2. Create a config file `config.js` with the following code:
     ```javascript
-    // Foursquare Info
-    const clientId = '';
-    const clientSecret = '';
-    const url = '';
+    const Config = {
+        // Foursquare Info
+        clientId: '<Your clientId>',
+        clientSecret: '<Your clientSecret>',
+        url: 'https://api.foursquare.com/v2/venues/explore?near=',
 
-    // OpenWeather Info
-    const OWKey = '';
-    const OWUrl = '';
+        // OpenWeather Info
+        OWKey: '<Your Open Weather API key>',
+        OWUrl: 'https://api.openweathermap.org/data/2.5/weather'
+    }
+
+    export default Config;
+```
 
 ## Authors
 * Isaac Friedman
