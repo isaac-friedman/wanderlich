@@ -9,7 +9,16 @@ const $venueDivs = [$("#venue1"), $("#venue2"), $("#venue3"), $("#venue4")];
 const $weatherDiv = $("#weather1");
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-// Add AJAX functions here:
+//Helper functions for generating HTML
+const createVenueHTML = (name, location, icon) => {
+  return `<h2>${name}</h2>
+  <img class="venueimage" src="${icon}"/>
+  <h3>Address:</h3>
+  <p>${location.address}</p>
+  <p>${location.city}</p>
+  <p>${location.country}</p>`;
+}
+
 const getVenues = async () => {
     const city = $input.val();
     const fetchUrl = Config.url+city+"&limit=10"+"&client_id="+Config.clientId+"&client_secret="+Config.clientSecret+"&v=20200324";
@@ -18,17 +27,31 @@ const getVenues = async () => {
     const response = await fetch(fetchUrl);
     if (response.ok) {
       const jsonResponse = await response.json();
-      const venues = jsonResponse.response.groups[0].items;
+      const venues = jsonResponse.response.groups[0].items.map(item => item.venue);;
       console.log(venues);
+      console.log(venues[0]);
+      return venues;
     } else {throw new Error('Unexpected Problem!');}
-    return venues;
     } catch(error) {
       console.log(error);
     }
 }
 
+const renderVenues = (toRender) => {
+    console.log("Rendering Venues");
+    console.log(toRender);
+    $venueDivs.forEach(($venue, index) => {
+        const venue = toRender[index];
+        const venueIcon = venue.categories[0].icon;
+        const venueImgSrc = venueIcon.prefix + 'bg_64' + venueIcon.suffix;
+        const venueContent = createVenueHTML(venue.name, venue.location, venueImgSrc);
+    $venue.append(venueContent);
+    });
+    $destination.append(`<h2>${toRender[0].location.city}</h2>`);
+    }
+
 const run = () => {
-  getVenues();
+  getVenues().then(venues => renderVenues(venues));
   return false;
 }
 
