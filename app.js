@@ -9,7 +9,7 @@ const $venueDivs = [$("#venue1"), $("#venue2"), $("#venue3"), $("#venue4")];
 const $weatherDiv = $("#weather1");
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-//Helper functions for generating HTML
+//Helper functions for generating HTML used by the Render functions
 const createVenueHTML = (name, location, icon) => {
   return `<h2>${name}</h2>
   <img class="venueimage" src="${icon}"/>
@@ -19,6 +19,7 @@ const createVenueHTML = (name, location, icon) => {
   <p>${location.country}</p>`;
 }
 
+//For fetching from APIs
 const getVenues = async () => {
     const city = $input.val();
     const fetchUrl = Config.url+city+"&limit=10"+"&client_id="+Config.clientId+"&client_secret="+Config.clientSecret+"&v=20200324";
@@ -37,6 +38,7 @@ const getVenues = async () => {
     }
 }
 
+//For Rendering HTML
 const renderVenues = (toRender) => {
     console.log("Rendering Venues");
     console.log(toRender);
@@ -50,6 +52,7 @@ const renderVenues = (toRender) => {
     $destination.append(`<h2>${toRender[0].location.city}</h2>`);
     }
 
+//MAIN
 const run = () => {
   getVenues().then(venues => renderVenues(venues));
   return false;
