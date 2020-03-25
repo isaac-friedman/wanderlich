@@ -88,9 +88,12 @@ const renderWeather = (toRender) => {
 
 //MAIN
 const run = () => {
-  getVenues().then(venues => renderVenues(venues));
-  getWeather().then(weather => renderWeather(weather));
-  return false;
+    $venueDivs.forEach(venue => venue.empty());
+    $weatherDiv.empty();
+    $destination.empty();
+    getVenues().then(venues => renderVenues(venues));
+    getWeather().then(weather => renderWeather(weather));
+    return false;
 }
 
 $submit.click(run);
