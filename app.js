@@ -28,7 +28,7 @@ const getVenues = async () => {
     const response = await fetch(fetchUrl);
     if (response.ok) {
       const jsonResponse = await response.json();
-      const venues = jsonResponse.response.groups[0].items.map(item => item.venue);;
+      const venues = jsonResponse.response.groups[0].items.map(item => item.venue);
       console.log(venues);
       console.log(venues[0]);
       return venues;
@@ -38,6 +38,22 @@ const getVenues = async () => {
     }
 }
 
+const getWeather = async () => {
+    console.log("Let's get that weather!");
+    const city = $input.val();
+    const fetchUrl = Config.OWUrl+'?q='+city+'&APPID='+Config.OWKey;
+    console.log(fetchUrl);
+    try {
+    const response = await fetch(fetchUrl);
+    if (response.ok) {
+      const jsonResponse = await response.json();
+      console.log(jsonResponse);
+      return(jsonResponse);
+    } else {throw new Error('Unexpected Problem!');}
+    } catch(error) {
+      console.log(error);
+    }
+}
 //For Rendering HTML
 const renderVenues = (toRender) => {
     console.log("Rendering Venues");
@@ -55,6 +71,7 @@ const renderVenues = (toRender) => {
 //MAIN
 const run = () => {
   getVenues().then(venues => renderVenues(venues));
+  getWeather();
   return false;
 }
 
