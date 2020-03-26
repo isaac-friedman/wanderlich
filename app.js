@@ -1,5 +1,19 @@
+/*Comment out when running on heroku
 import Config from './config.js';
+*/
+/* Config from heroku environment variables. Comment out when hosting somewhere
+* other than heroku.
+*/
+Config {
+    //Foursquare Info
+    clientId: process.env.clientId,
+    clientSecret: process.env.clientSecret,
+    url: process.env.url,
 
+    //OpenWeather Info
+    OWKey: process.env.OWKey,
+    OWUrl: process.env.OWUrl
+}
 // Page Elements
 const $input = $('#city');
 const $submit = $('#button');
