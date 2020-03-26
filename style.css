@@ -58,7 +58,7 @@ footer {
 .container {
   max-width: 900px;
   margin: auto;
-  visibility: hidden;
+  /*visibility: hidden;*/
 }
 
 .weather h2 {
