@@ -6,13 +6,13 @@ import Config from './config.js';
 */
 const Config = {
     //Foursquare Info
-    clientId: process.env.clientId,
-    clientSecret: process.env.clientSecret,
-    url: process.env.url,
+    clientId: ENV['clientId'],
+    clientSecret: ENV['clientSecret'],
+    url: ENV['url'],
 
     //OpenWeather Info
-    OWKey: process.env.OWKey,
-    OWUrl: process.env.OWUrl
+    OWKey: ENV['OWKey'],
+    OWUrl: ENV['OWUrl']
 }
 // Page Elements
 const $input = $('#city');
