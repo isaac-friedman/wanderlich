@@ -4,7 +4,7 @@ import Config from './config.js';
 /* Config from heroku environment variables. Comment out when hosting somewhere
 * other than heroku.
 */
-Config {
+const Config = {
     //Foursquare Info
     clientId: process.env.clientId,
     clientSecret: process.env.clientSecret,
